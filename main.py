@@ -22,7 +22,7 @@ except:
    
 
 
-nome_contador = "OneX-1.0.1.Matrix"
+nome_contador = "OneX-1.0.2.Matrix"
 link_contador = "https://whos.amung.us/pingjs/?k=6gjsucgcje"
 db_host = 'https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt'
 
@@ -82,7 +82,7 @@ def database_update(url):
                             os.remove(os.path.join(r, file))
                         except:
                             pass
-            import downloader
+            from lib import downloader
             downloader.download(link, 'dados', temp+'/'+filename)            
     except:
         pass
