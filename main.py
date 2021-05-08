@@ -447,11 +447,6 @@ def play_video(name,url,iconimage,description,subtitle,play):
     #notify('Resolvendo url...',name,iconimage)
     url_resolved = str(resolve(url))
     if url_resolved !='' or url_resolved !='None':
-        legenda = xbmcaddon.Addon().getSetting("legenda")
-        if legenda == 'true':
-            file_srt = srt_browser()
-        else:
-            file_srt = ''
         if 'netcine' in url_resolved:
             url_final = url_resolved+'|Referer=https://p.netcine.biz/'
         else:
