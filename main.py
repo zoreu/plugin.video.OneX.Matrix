@@ -83,8 +83,7 @@ def database_update(url):
                         except:
                             pass
             import downloader
-            downloader.download(link, 'dados', temp+'/'+filename)
-            
+            downloader.download(link, 'dados', temp+'/'+filename)            
     except:
         pass
     
