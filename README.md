@@ -3,6 +3,8 @@ Addon OneX - Kodi Matrix+
 
 Sqlite Editor - https://sqlitebrowser.org/
 
+[Arquivo verificador](https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt)
+
 [Download arquivo sqlite](https://zoreu.inrupt.net/public/onex4.db)
 
 [Download Addon](https://github.com/OnePlayHD/OneRepo/raw/master/matrix/plugin.video.OneX.Matrix/plugin.video.OneX.Matrix-1.0.2.zip)
