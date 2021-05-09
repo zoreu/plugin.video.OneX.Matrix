@@ -13,3 +13,5 @@ Sqlite Editor - https://sqlitebrowser.org/
 [Download Addon](https://github.com/OnePlayHD/OneRepo/raw/master/matrix/plugin.video.OneX.Matrix/plugin.video.OneX.Matrix-1.0.2.zip)
 
 ![Onex Addon](https://raw.githubusercontent.com/zoreu/zoreu.github.io/master/kodi/onex_image.jpg)
+
+Modificações no addon como pasta padrão teram q ser feitas no modulo resolveurl nos arquivos: _init_.py, CustomProgressDialog.py, kodi.py, log_utils.py
