@@ -1,8 +1,8 @@
 # plugin.video.OneX.Matrix
 Addon OneX - Kodi Matrix+
 
-Aviso: Os conteúdos do Addon são links de terceiros, não hospedo nenhum conteúdo
-Warning: The contents of the addon are third-party links, I do not host any content
+Aviso: Os conteúdos do Addon são links de terceiros, não hospedo nenhum conteúdo.
+Warning: The contents of the addon are third-party links, I do not host any content.
 
 Sqlite Editor - https://sqlitebrowser.org/
 
