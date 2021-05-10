@@ -22,7 +22,7 @@ except:
    
 
 
-nome_contador = "OneX-1.0.2.Matrix"
+nome_contador = "OneX-1.0.3.Matrix"
 link_contador = "https://whos.amung.us/pingjs/?k=6gjsucgcje"
 db_host = 'https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt'
 
@@ -141,8 +141,8 @@ def get_search_string(heading='', message=''):
 def find():
     vq = get_search_string(heading="Digite algo para pesquisar")        
     if ( not vq ): return False, 0
-    title = urllib.quote_plus(vq)
-    pesquisar(title)
+    #title = urllib.quote_plus(vq)
+    pesquisar(vq)
 
 
 def pesquisar(name):
