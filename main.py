@@ -22,7 +22,7 @@ except:
    
 
 
-nome_contador = "OneX-1.0.3.Matrix"
+nome_contador = "OneX-1.0.4.Matrix"
 link_contador = "https://whos.amung.us/pingjs/?k=6gjsucgcje"
 db_host = 'https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt'
 
@@ -86,6 +86,15 @@ def database_update(url):
             downloader.download(link, 'dados', temp+'/'+filename)            
     except:
         pass
+        
+def database_clear():
+    for r, d, f in os.walk(temp):
+        for file in f:
+            if file.endswith(".db"):
+                try:
+                    os.remove(os.path.join(r, file))
+                except:
+                    pass
     
        
 def conection_sqlite(sql):
@@ -1082,6 +1091,7 @@ def main():
         database_update(db_host)
         radios()
     elif mode==18:
+        database_clear()
         database_update(db_host)
         notify('Conteúdos verificados!')
     elif mode==19:
