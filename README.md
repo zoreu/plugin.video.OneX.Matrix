@@ -6,6 +6,8 @@ Warning: The contents of the addon are third-party links, I do not host any cont
 
 Sqlite Editor - https://sqlitebrowser.org/
 
+Extrair link contador - https://whos.amung.us/
+
 [Arquivo verificador](https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt)
 
 [Download arquivo sqlite](https://zoreu.inrupt.net/public/onex4.db)
