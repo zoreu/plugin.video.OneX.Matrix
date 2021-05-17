@@ -12,7 +12,7 @@ Extrair link contador - https://whos.amung.us/
 
 [Download arquivo sqlite](https://zoreu.inrupt.net/public/onex4.db)
 
-[Download Db Limpo(https://github.com/zoreu/zoreu.github.io/raw/master/kodi/limpo01.db)
+[Download Db Limpo](https://github.com/zoreu/zoreu.github.io/raw/master/kodi/limpo01.db)
 
 [Download Addon](https://github.com/OnePlayHD/OneRepo/raw/master/matrix/plugin.video.OneX.Matrix/plugin.video.OneX.Matrix-1.0.3.zip)
 
