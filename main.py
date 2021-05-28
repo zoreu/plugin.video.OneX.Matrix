@@ -11,10 +11,7 @@ import xbmcaddon
 import xbmcvfs
 import sqlite3
 import base64
-try:
-    import urllib.parse as urllib
-except ImportError:
-    import urllib
+import urllib.parse as urllib
 try:
     import json
 except:
@@ -22,7 +19,7 @@ except:
    
 
 
-nome_contador = "OneX-1.0.4.Matrix"
+nome_contador = "OneX-1.0.5.Matrix"
 link_contador = "https://whos.amung.us/pingjs/?k=6gjsucgcje"
 db_host = 'https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt'
 
@@ -31,22 +28,15 @@ addon = xbmcaddon.Addon()
 addonname = addon.getAddonInfo('name')
 icon = addon.getAddonInfo('icon')
 addon_version = addon.getAddonInfo('version')
-try:
-    profile = xbmcvfs.translatePath(addon.getAddonInfo('profile').decode('utf-8'))
-except:
-    profile = xbmcvfs.translatePath(addon.getAddonInfo('profile'))
-try:
-    home = xbmcvfs.translatePath(addon.getAddonInfo('path').decode('utf-8'))
-except:
-    home = xbmcvfs.translatePath(addon.getAddonInfo('path'))
-fanart_default = home+'/fanart.jpg'
+profile = xbmcvfs.translatePath(addon.getAddonInfo('profile'))
+home = xbmcvfs.translatePath(addon.getAddonInfo('path'))
+fanart_default = os.path.join(home, 'fanart.jpg')
 favorites = os.path.join(profile, 'favorites.dat')
-temp = profile
+
 if os.path.exists(favorites)==True:
     FAV = open(favorites).read()
 else:
     FAV = []
-
 
 
 def notify(message,name=False,iconimage=False,timeShown=5000):
@@ -58,7 +48,7 @@ def notify(message,name=False,iconimage=False,timeShown=5000):
 
 def database_update(url):
     try:
-        os.mkdir(temp)
+        os.mkdir(profile)
     except:
         pass
     try:
@@ -70,12 +60,12 @@ def database_update(url):
         filename = ntpath.basename(link)
         # r=root, d=directories, f = files
         myfile = []
-        for r, d, f in os.walk(temp):
+        for r, d, f in os.walk(profile):
             for file in f:
                 if file.endswith(".db"):
                     myfile.append(os.path.join(r, file))
         if not filename in str(myfile):
-            for r, d, f in os.walk(temp):
+            for r, d, f in os.walk(profile):
                 for file in f:
                     if file.endswith(".db"):
                         try:
@@ -83,12 +73,13 @@ def database_update(url):
                         except:
                             pass
             from lib import downloader
-            downloader.download(link, 'dados', temp+'/'+filename)            
+            dest = os.path.join(profile, filename)
+            downloader.download(link, 'dados', dest)            
     except:
         pass
         
 def database_clear():
-    for r, d, f in os.walk(temp):
+    for r, d, f in os.walk(profile):
         for file in f:
             if file.endswith(".db"):
                 try:
@@ -100,7 +91,7 @@ def database_clear():
 def conection_sqlite(sql):
     try:
         db_list = []
-        for r, d, f in os.walk(temp):
+        for r, d, f in os.walk(profile):
             for file in f:
                 if file.endswith(".db"):
                     db_list.append(os.path.join(r, file))        
@@ -127,7 +118,6 @@ def principal():
     addDir('[B]Rádios[/B]','',17,'','','','','','')
     addDir('[B]Verificar e atualizar conteúdos[/B]','',18,'','','','','','')
     SetView('WideList')
-    #xbmcplugin.endOfDirectory(addon_handle,cacheToDisc=False)
     xbmcplugin.endOfDirectory(addon_handle)
     
  
@@ -476,7 +466,6 @@ def play_video(name,url,iconimage,description,subtitle,play):
             else:        
                 xbmc.Player().play(item=url_final, listitem=li)
     else:
-        #xbmcgui.Dialog().ok('[B][COLOR white]AVISO[/COLOR][/B]','Não foi possivel reproduzir o video')
         notify('Falha ao resolver url!',name,iconimage)
 
   
@@ -575,14 +564,7 @@ def netcine_resolve(url,LOG=False):
 #streamtape.com        
 def streamtape(url):
     correct_url = url.replace('streamtape.com/v/', 'streamtape.com/e/')
-    headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36",
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-    }
-    r = requests.get(url, allow_redirects=True, headers=headers, verify=False)
-    r.encoding = 'utf-8'
-    data = r.text
+    data = open_url(correct_url)
     link_part1_re = re.compile('videolink.+?style="display:none;">(.*?)&token=').findall(data)
     link_part2_re = re.compile("<script>.+?token=(.*?)'.+?</script>").findall(data)
     if link_part1_re !=[] and link_part2_re !=[]:
@@ -740,7 +722,7 @@ def resolve(url):
             resolved = youtube(url)
         elif 'netcine' in url:
             resolved = netcine_resolve(url)
-        elif not 'feurl' in url and not 'fembed' in url and '.mp4' in url or '.m3u8' in url or '.mp3' in url:
+        elif not 'feurl' in url and not 'fembed' in url and '.mp4' in url or not 'feurl' in url and not 'fembed' in url and '.mp3' in url or not 'feurl' in url and not 'fembed' in url and '.mkv' in url or not 'feurl' in url and not 'fembed' in url and '.m3u8' in url:
             resolved = url
         else:
             try:
@@ -764,16 +746,11 @@ def resolve(url):
        
 
 def limpar_lista():
-    try:
-        Path = xbmcvfs.translatePath(xbmcaddon.Addon().getAddonInfo('profile')).decode("utf-8")
-    except:
-        Path = xbmcvfs.translatePath(xbmcaddon.Addon().getAddonInfo('profile'))
-    arquivo = os.path.join(Path, "favorites.dat")
-    exists = os.path.isfile(arquivo)
+    exists = os.path.isfile(favorites)
     if exists:
         if xbmcgui.Dialog().yesno(addonname, 'Deseja limpar minha lista?'):
             try:
-                os.remove(arquivo)
+                os.remove(favorites)
             except:
                 pass
             xbmcgui.Dialog().ok('Sucesso', '[B][COLOR white]Minha lista limpa com sucesso![/COLOR][/B]')
