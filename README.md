@@ -10,7 +10,7 @@ Extrair link contador - https://whos.amung.us/
 
 [Arquivo verificador](https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt)
 
-[Download arquivo sqlite](https://zoreu.inrupt.net/public/onex4.db)
+[Download arquivo sqlite](https://zoreu.inrupt.net/public/onex6.db)
 
 [Download Db Limpo](https://github.com/zoreu/zoreu.github.io/raw/master/kodi/limpo01.db)
 
