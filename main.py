@@ -19,7 +19,7 @@ except:
    
 
 
-nome_contador = "OneX-1.0.5.Matrix"
+nome_contador = "OneX-1.0.6.Matrix"
 link_contador = "https://whos.amung.us/pingjs/?k=6gjsucgcje"
 db_host = 'https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt'
 
@@ -774,13 +774,19 @@ def getFavorites():
                 description = i[6]
                 cat = i[7]
                 season = i[8]
-                play = i[9]
-                if play == 'True':
+                #play = i[9]
+                if mode == 20:
                     play = True
-                    folder = False
+                    folder= False
                 else:
                     play = False
                     folder = True
+                #if play == 'True':
+                #    play = True
+                #    folder = False
+                #else:
+                #    play = False
+                #    folder = True
                 
                 addDir(name.encode('utf-8', 'ignore'),url.encode('utf-8'),mode,str(subtitle),str(iconimage),str(fanArt),str(description).encode('utf-8', 'ignore'),str(cat).encode('utf-8', 'ignore'),str(season).encode('utf-8', 'ignore'),play=play,folder=folder,favorite=True)
             xbmcplugin.setContent(addon_handle, 'movies')
