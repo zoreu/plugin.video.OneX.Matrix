@@ -19,7 +19,7 @@ except:
    
 
 
-nome_contador = "OneX-1.0.6.Matrix"
+nome_contador = "OneX-1.0.7.Matrix"
 link_contador = "https://whos.amung.us/pingjs/?k=6gjsucgcje"
 db_host = 'https://raw.githubusercontent.com/zoreu/base_onex/main/base.txt'
 
@@ -682,6 +682,20 @@ def fsh_link(url):
         resolved = ''
     return resolved
     
+
+def zeroflix(url):
+    if 'zeroflix.org/player' in url:
+        data = open_url(url)
+        video = re.compile('source.+?src="(.*?)"').findall(data)
+        if video !=[]:
+            resolved = video[0]
+        else:
+            resolved = ''
+    else:
+        resolved = ''
+    return resolved
+        
+
 def youtube(url):
     url_data = urllib.urlparse(url)
     query = urllib.parse_qs(url_data.query)
@@ -722,6 +736,8 @@ def resolve(url):
             resolved = youtube(url)
         elif 'netcine' in url:
             resolved = netcine_resolve(url)
+        elif 'zeroflix.org/player' in url:
+            resolved = zeroflix(url)
         elif not 'feurl' in url and not 'fembed' in url and '.mp4' in url or not 'feurl' in url and not 'fembed' in url and '.mp3' in url or not 'feurl' in url and not 'fembed' in url and '.mkv' in url or not 'feurl' in url and not 'fembed' in url and '.m3u8' in url:
             resolved = url
         else:
