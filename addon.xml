@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.OneX.Matrix" name="[B]One[COLOR aquamarine]X[/COLOR][/B]" version="1.0.8" provider-name="Equipe OnePlay"> 
+<addon id="plugin.video.OneX.Matrix" name="[B]One[COLOR aquamarine]X[/COLOR][/B]" version="1.0.9" provider-name="Equipe OnePlay"> 
 <requires>
 	<import addon="xbmc.python" version="3.0.0"/>
 	<import addon="script.module.simplejson"/>
@@ -42,6 +42,8 @@ v1.0.7
 - suporte a novo site
 v1.0.8
 - suporte a novo site
+v1.0.9
+- correção
 	</news>
 </extension>
 </addon>

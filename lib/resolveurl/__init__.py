@@ -31,6 +31,7 @@ from six.moves import urllib_parse
 import six
 import sys
 import xbmcaddon
+import os
 try:
     from kodi_six import xbmcvfs, xbmcgui
 except:
@@ -41,7 +42,8 @@ try:
     home = xbmcvfs.translatePath(xbmcaddon.Addon('plugin.video.OneX.Matrix').getAddonInfo('path').decode('utf-8'))
 except:
     home = xbmcvfs.translatePath(xbmcaddon.Addon('plugin.video.OneX.Matrix').getAddonInfo('path'))
-sys.path.insert(1, home+'/lib')
+path_lib = os.path.join(home, 'lib')
+sys.path.insert(1, path_lib)
 from resolveurl import common
 from resolveurl.hmf import HostedMediaFile
 from resolveurl.resolver import ResolveUrl
